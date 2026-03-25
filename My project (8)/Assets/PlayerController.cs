@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
@@ -40,5 +41,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
             myAnimator.SetBool("move", false);
         }
         transform.Translate(Vector3.right * moveSpeed * movelnput.x * Time.deltaTime);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Death")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            SceneManager.LoadScene("PlayScene_" + collision.name);
+        }
     }
 }
